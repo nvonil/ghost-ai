@@ -1,1 +1,0 @@
-When I click the logout button, I am redirected to a black/blank page. It is not until I reload that the sign in page properly shows.
