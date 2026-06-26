@@ -4,7 +4,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Feature 03: Auth — complete
+- Feature 04: Project Dialogs — complete
 
 ## Current Goal
 
@@ -16,6 +16,7 @@ Update this file whenever the current phase, active feature, or implementation s
 - 01-design-system: shadcn/ui configured for Tailwind v4, all UI primitive components installed, lucide-react installed, lib/utils.ts with cn() helper created
 - 02-editor: EditorNavbar (fixed bar, PanelLeftOpen/Close toggle, dark bg + bottom border), ProjectSidebar (overlay, slide-in, Tabs, New Project button), dialog pattern established via existing shadcn dialog.tsx
 - 03-auth: ClerkProvider with dark theme + CSS variable overrides in root layout, proxy.ts with protected-first middleware, /sign-in and /sign-up two-panel pages, / redirects by auth state, UserButton in editor navbar
+- 04-project-dialogs: editor home screen, Create/Rename/Delete dialogs (useProjectDialogs hook), sidebar project items with owned-only actions, mobile backdrop scrim, mock project state in lib/mock-projects.ts
 
 ## In Progress
 
