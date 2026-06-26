@@ -19,6 +19,7 @@ interface RenameProjectDialogProps {
   onNameChange: (name: string) => void
   onSubmit: () => void
   onClose: () => void
+  loading?: boolean
 }
 
 export function RenameProjectDialog({
@@ -28,6 +29,7 @@ export function RenameProjectDialog({
   onNameChange,
   onSubmit,
   onClose,
+  loading,
 }: RenameProjectDialogProps) {
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
@@ -44,17 +46,17 @@ export function RenameProjectDialog({
           value={name}
           onChange={(e) => onNameChange(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && name.trim()) onSubmit()
+            if (e.key === "Enter" && name.trim() && name !== currentName && !loading) onSubmit()
           }}
         />
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="outline" onClick={onClose} disabled={loading}>
               Cancel
             </Button>
           </DialogClose>
-          <Button disabled={!name.trim() || name === currentName} onClick={onSubmit}>
-            Rename
+          <Button disabled={!name.trim() || name === currentName || loading} onClick={onSubmit}>
+            {loading ? "Renaming…" : "Rename"}
           </Button>
         </DialogFooter>
       </DialogContent>

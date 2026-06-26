@@ -15,19 +15,21 @@ import { Input } from "@/components/ui/input"
 interface CreateProjectDialogProps {
   open: boolean
   name: string
-  slug: string
+  roomId: string
   onNameChange: (name: string) => void
   onSubmit: () => void
   onClose: () => void
+  loading?: boolean
 }
 
 export function CreateProjectDialog({
   open,
   name,
-  slug,
+  roomId,
   onNameChange,
   onSubmit,
   onClose,
+  loading,
 }: CreateProjectDialogProps) {
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
@@ -44,22 +46,25 @@ export function CreateProjectDialog({
             placeholder="Project name"
             value={name}
             onChange={(e) => onNameChange(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && name.trim() && !loading) onSubmit()
+            }}
           />
-          {slug && (
+          {roomId && (
             <p className="text-xs text-muted-foreground">
-              Slug:{" "}
-              <span className="font-mono">{slug}</span>
+              Room ID:{" "}
+              <span className="font-mono">{roomId}</span>
             </p>
           )}
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline" onClick={onClose}>
+            <Button variant="outline" onClick={onClose} disabled={loading}>
               Cancel
             </Button>
           </DialogClose>
-          <Button disabled={!name.trim()} onClick={onSubmit}>
-            Create
+          <Button disabled={!name.trim() || loading} onClick={onSubmit}>
+            {loading ? "Creating…" : "Create"}
           </Button>
         </DialogFooter>
       </DialogContent>
