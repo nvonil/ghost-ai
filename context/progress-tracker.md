@@ -4,7 +4,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Feature 04: Project Dialogs — complete
+- Feature 05: Prisma — complete
 
 ## Current Goal
 
@@ -17,6 +17,7 @@ Update this file whenever the current phase, active feature, or implementation s
 - 02-editor: EditorNavbar (fixed bar, PanelLeftOpen/Close toggle, dark bg + bottom border), ProjectSidebar (overlay, slide-in, Tabs, New Project button), dialog pattern established via existing shadcn dialog.tsx
 - 03-auth: ClerkProvider with dark theme + CSS variable overrides in root layout, proxy.ts with protected-first middleware, /sign-in and /sign-up two-panel pages, / redirects by auth state, UserButton in editor navbar
 - 04-project-dialogs: editor home screen, Create/Rename/Delete dialogs (useProjectDialogs hook), sidebar project items with owned-only actions, mobile backdrop scrim, mock project state in lib/mock-projects.ts
+- 05-prisma: Project + ProjectCollaborator models in prisma/models/project.prisma, lib/prisma.ts singleton (PrismaPg for postgres://, Accelerate branch for prisma+postgres://), migration applied, client generated to app/generated/prisma
 
 ## In Progress
 
@@ -41,6 +42,8 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Architecture Decisions
 
+- Prisma 7 requires adapter passed to PrismaClient constructor; using PrismaPg({ connectionString }) — no separate pg.Pool needed
+- Multi-file schema via prisma.config.ts `schema: "prisma/"` — models live in prisma/models/, generator/datasource stay in prisma/schema.prisma
 - shadcn/ui v4.11.0 initialized with Radix/Nova preset, Tailwind v4 CSS-variable mode
 - Dark theme lives in .dark class in globals.css (toggled via class strategy, not media query)
 - Do not modify files under components/ui/* — managed by shadcn CLI
